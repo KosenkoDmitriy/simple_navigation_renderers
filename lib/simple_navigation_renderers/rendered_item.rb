@@ -59,7 +59,7 @@ module SimpleNavigationRenderers
             if split
               splitted_simple_part + splitted_dropdown_part
             else
-              dropdown_part( item.name.to_s + ' ' + caret )
+              dropdown_part( item.name + ' ' + caret )
             end
           else
             content_tag(:li, dropdown_submenu_link, options)
@@ -89,6 +89,7 @@ module SimpleNavigationRenderers
         link_options[:"data-toggle"] = "dropdown"
         link_options[:"data-target"] = "#"
 
+        name = name.html_safe if name.respond_to?('html_safe')
         content = link_to( name, "#", link_options ) + render_sub_navigation_for(item)
         content_tag(:li, content, options)
       end
